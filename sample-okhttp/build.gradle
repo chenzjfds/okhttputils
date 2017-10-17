@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.neenbedankt.android-apt'  //dagger2
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.zhy.sample_okhttp"
@@ -22,6 +22,18 @@ android {
     lintOptions{
         abortOnError false
     }
+    productFlavors {
+        okhttp{
+            applicationIdSuffix '.okhttp'
+        }
+        retrofit{
+            applicationIdSuffix '.retrofit'
+        }
+        dagger2{
+            applicationIdSuffix '.dagger2'
+        }
+    }
+
 }
 
 dependencies {
@@ -32,4 +44,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
     compile 'com.github.franmontiel:PersistentCookieJar:v0.9.3'
+    //dagger2
+    apt 'com.google.dagger:dagger-compiler:2.2'
+    compile 'com.google.dagger:dagger:2.2'
+    provided 'javax.annotation:jsr250-api:1.0'
 }
